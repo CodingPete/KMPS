@@ -42,6 +42,30 @@ public class Main {
                         countTest
                 )
         );  // [2, 4]
+
+        List<List<Integer>> flatMapTest = new ArrayList<List<Integer>>();
+        flatMapTest.add(
+                Arrays.asList(1,2)
+        );
+        flatMapTest.add(
+                Arrays.asList(3,4)
+        );
+        flatMapTest.add(
+                Arrays.asList(5,6)
+        );
+
+        System.out.println(
+                flatMap(
+                        x -> x,
+                        flatMapTest
+                )
+        );
+
+        System.out.println(
+                flatten(
+                        flatMapTest
+                )
+        );
     }
 
     static <T> Integer count(List<T> list) {
@@ -102,6 +126,33 @@ public class Main {
                     if(p.test(y)) {
                         x.add(y);
                     }
+                    return x;
+                },
+                new ArrayList<T>(),
+                list
+        );
+    }
+
+    static <T, R> List<R> flatMap(
+            Function<T, List<R>> f,
+            List<T> list
+    ) {
+        return fold(
+                x -> y -> {
+                    x.addAll(f.apply(y));
+                    return x;
+                },
+                new ArrayList<R>(),
+                list
+        );
+    }
+
+    static <T> List<T> flatten(
+            List<List<T>> list
+    ) {
+        return fold(
+                x -> y -> {
+                    x.addAll(y);
                     return x;
                 },
                 new ArrayList<T>(),
