@@ -133,6 +133,10 @@ public class Main {
         );
     }
 
+    // Hier weiss ich nicht so wirklich weiter. In der Aufgabenbeschreibung ist ein Fehler in der
+    // Funktionsdeklaration. Bei dieser Implementation bekomme ich oben in der Anwendung Probleme.
+    // Dort muss ich dann eine Funktion f übergeben, die auf einer Liste arbeitet und nicht auf den
+    // einzelnen Elementen.
     static <T, R> List<R> flatMap(
             Function<T, List<R>> f,
             List<T> list
