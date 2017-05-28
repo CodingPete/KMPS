@@ -14,6 +14,9 @@ map(
     zweierpotenzen
 );
 
+// Zweierpotenzen mit Curry
+
+
 function curry<T, S, R> (
     f: (T) => (S) => (R)
 ) :(T) => ((S) => (R)) {
