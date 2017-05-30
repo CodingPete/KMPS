@@ -4,29 +4,52 @@
 
 // Erzeugung
 let zweierpotenzen =  map(
-    x => 2**x,
+    x => {
+        x = 2**x;
+        console.log(x);
+        return x;
+    },
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 );
 
-// Ausgabe
-map(
-    x => console.log(x),
-    zweierpotenzen
+// Curry Version von Math.pow
+let powc = curry(
+    Math.pow
 );
 
-// Zweierpotenzen mit Curry
+console.log(
+    powc(2)(4)
+);
 
+// zurückcurry
+let pow = uncurry(
+    powc
+);
 
-function curry<T, S, R> (
-    f: (T) => (S) => (R)
-) :(T) => ((S) => (R)) {
-    return x => y => f(x)(y);
+console.log(
+    pow(2, 4)
+);
+
+// Zweierpotenzen mit curry
+let zweierCurry = map(
+    x => {
+        x = powc(2)(x);
+        console.log(x);
+        return x;
+    },
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+);
+
+function curry<T, R, S>(
+    f: (x: T, y:R) => S
+) : (x: T) => (y: R) => S {
+    return (x: T) => (y: R) => f(x, y);
 }
 
-function uncurry<T, S, R> (
-    f: (T) => ((S) => (R)),
-) {
-    return (x, y) => f(x)(y);
+function uncurry<T, R, S> (
+    f: (x: T) => (y: R) => S
+) : (x: T, y: R) => S {
+        return (x: T, y: R) => f(x)(y);
 }
 
 function map<T, R>(
