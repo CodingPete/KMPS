@@ -12,6 +12,8 @@ import java.util.function.Function;
 public class Main {
     public static void main(String[] args) {
 
+        // Der Unterschied, man muss Doppelpunkte verwenden. Java unterscheided Methoden und Funktionen, das sind zwei unterschiedliche Dinge
+        // Die leben in sehr unterschiedlichen Welten. Javascript hat keine UNterscheidung, da es funktional inspiriert ist.
         List<Double> zweierpotenzen = map(
                 x -> {
                     x = curry(
@@ -92,6 +94,10 @@ public class Main {
         };
     }
     */
+/*
+Info aus der Vorlesung :
+    Was musste man mit dem Foldl hier machen?
+ */
 
     static <T> List<T> reverse(List<T> list) {
         return fold(
